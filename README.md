@@ -28,14 +28,14 @@ This project demonstrates an **end-to-end real-time data engineering pipeline** 
 - **Apache Airflow:** Workflow orchestration for automation
 
 ---
+## How it works
 
-## **How it works**
+**Producer:** `vehicle_producer.py` continuously streams random vehicle events to Kafka.  
+**Consumer:** `batch_consumer.py` reads the Kafka topic, buffers messages, and flushes CSV files to MinIO every few seconds or when the batch size is reached.  
+**Spark Processor:** `streaming_job.py` reads raw CSVs from MinIO, adds `event_time`, `year`, `month`, and `day` columns, computes `total_fine` per `user_id`, and writes clean Parquet data back to MinIO.  
+**Snowflake Loader:** `snowflake_loader.py` scans processed files in MinIO and merges data into Snowflake using `MERGE` for upserts.  
+**Airflow DAG:** `snowflake_loader_dag.py` runs the loader hourly to keep Snowflake fresh.
 
-1️) **Producer:** `vehicle_producer.py` continuously streams random vehicle events to Kafka.  
-2️) **Consumer:** `batch_consumer.py` reads Kafka topic, buffers messages, and flushes CSV files to MinIO every few seconds or batch size.  
-3️) **Spark Processor:** `streaming_job.py` reads raw CSVs from MinIO, adds `event_time`, `year`, `month`, `day`, computes `total_fine` per `user_id`, writes clean Parquet data back to MinIO.  
-4️) **Snowflake Loader:** `snowflake_loader.py` scans processed files in MinIO, merges data into Snowflake using `MERGE` for upserts.
-5) **Airflow DAG:** snowflake_loader_dag.py  runs the loader hourly to keep Snowflake fresh
 ---
 
 ##  **Key Learning**
