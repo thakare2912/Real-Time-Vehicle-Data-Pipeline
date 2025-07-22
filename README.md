@@ -51,11 +51,11 @@ This project demonstrates an **end-to-end real-time data engineering pipeline** 
 - Start the producer: `python producer/vehicle_producer.py`
 - Start the consumer: `python consumer/batch_consumer.py`
 - Start Spark job:
--                    `docker exec -it stockmarketdatapipeline-spark-master-1 bash`
--                   `spark-submit \
+-                   docker exec -it stockmarketdatapipeline-spark-master-1 bash
+-                   spark-submit \
                     --master spark://spark-master:7077 \
                     --packages org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk-bundle:1.11.901 \
-                     /opt/spark/jobs/vehicle-info_PySpark_Streaming.py`
+                     /opt/spark/jobs/vehicle-info_PySpark_Streaming.py
 - Load to Snowflake: `python snowflake_loader/snowflake_loader.py`
 
 ---
