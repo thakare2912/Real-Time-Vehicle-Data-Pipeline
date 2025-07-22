@@ -13,7 +13,7 @@ This project demonstrates an **end-to-end real-time data engineering pipeline** 
 
 - **Kafka Producer:** Simulates live vehicle sensor data including speed, location, fines.
 - **Kafka Consumer:** Consumes events in batches and writes partitioned CSVs to MinIO.
-- **Spark Structured Streaming:** Reads raw data from MinIO, parses timestamps, partitions data by year/month/day, adds aggregations (e.g., `total_fine` per user) and writes to processed zone.
+- **Spark Structured Streaming:** Reads raw data from MinIO, parses timestamps, partitions data by year/month/day and writes to processed zone.
 - **Snowflake Loader:** Incrementally loads processed Parquet data from MinIO to Snowflake using a MERGE strategy (upserts).
 - **Airflow DAG:** (Recommended) Orchestrates Snowflake loads on an hourly schedule.
 ---
@@ -32,7 +32,7 @@ This project demonstrates an **end-to-end real-time data engineering pipeline** 
 
 **Producer:** `vehicle_producer.py` continuously streams random vehicle events to Kafka.  
 **Consumer:** `batch_consumer.py` reads the Kafka topic, buffers messages, and flushes CSV files to MinIO every few seconds or when the batch size is reached.  
-**Spark Processor:** `streaming_job.py` reads raw CSVs from MinIO, adds `event_time`, `year`, `month`, and `day` columns, computes `total_fine` per `user_id`, and writes clean Parquet data back to MinIO.  
+**Spark Processor:** `streaming_job.py` reads raw CSVs from MinIO, adds `event_time`, `year`, `month`, and `day` columns, and writes clean Parquet data back to MinIO.  
 **Snowflake Loader:** `snowflake_loader.py` scans processed files in MinIO and merges data into Snowflake using `MERGE` for upserts.  
 **Airflow DAG:** `snowflake_loader_dag.py` runs the loader hourly to keep Snowflake fresh.
 
