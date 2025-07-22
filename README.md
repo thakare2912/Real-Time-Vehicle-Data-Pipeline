@@ -50,7 +50,8 @@ This project demonstrates an **end-to-end real-time data engineering pipeline** 
 - Run Kafka + MinIO (or use `docker-compose.yml`)
 - Start the producer: `python producer/vehicle_producer.py`
 - Start the consumer: `python consumer/batch_consumer.py`
-- Start Spark job: `docker exec -it stockmarketdatapipeline-spark-master-1 bash`
+- Start Spark job:
+-                    `docker exec -it stockmarketdatapipeline-spark-master-1 bash`
 -                   `spark-submit \
                     --master spark://spark-master:7077 \
                     --packages org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk-bundle:1.11.901 \
