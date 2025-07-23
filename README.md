@@ -25,8 +25,7 @@ Fully containerized with Docker
 
 - `pip install -r requirements.txt`
 - Run Kafka + MinIO (or use `docker-compose.yml`)
-- Start the producer: `
-                   python producer/vehicle_producer.py
+- Start the producer: ` python producer/vehicle_producer.py `
 - Start the consumer: `python consumer/batch_consumer.py`
 - Start Spark job:
 -                   docker exec -it stockmarketdatapipeline-spark-master-1 bash
